@@ -334,7 +334,7 @@ export function VideoPage({ userId }: VideoPageProps) {
           className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded"
           style={{ background: 'var(--nb-accent, #8B4513)', color: '#f5ecd8' }}
         >
-          <Plus size={12} /> Nuevo
+          <Plus size={12} />Nuevo
         </button>
       </div>
 
