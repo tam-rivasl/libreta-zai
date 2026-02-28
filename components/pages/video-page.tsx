@@ -334,10 +334,10 @@ export function VideoPage({ userId }: VideoPageProps) {
           className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded"
           style={{ background: 'var(--nb-accent, #8B4513)', color: '#f5ecd8' }}
         >
-          <Plus size={12} /> Agregar
+          <Plus size={12} /> Nuevo
         </button>
       </div>
-      
+
       {/* Subtitle */}
       <p className="text-[10px]" style={{ color: 'var(--nb-muted, #8B7355)', height: `${LINE_H}px`, lineHeight: `${LINE_H}px` }}>
         {videos.length} {videos.length === 1 ? 'video' : 'videos'}
