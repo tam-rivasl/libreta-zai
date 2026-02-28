@@ -233,10 +233,10 @@ export function WritingPage({ userId }: WritingPageProps) {
             className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded transition-all active:opacity-70"
             style={{ background: 'var(--nb-accent, #8B4513)', color: '#f5ecd8' }}
           >
-            <Plus size={12} /> Nuevo
+            <Plus size={12} />Añadir
           </button>
         </div>
-        
+
         {/* Subtitle — on line 2 */}
         <p className="text-[10px]" style={{ color: 'var(--nb-muted, #8B7355)', height: `${LINE_H}px`, lineHeight: `${LINE_H}px` }}>
           {writings.length} {writings.length === 1 ? 'escrito' : 'escritos'}
