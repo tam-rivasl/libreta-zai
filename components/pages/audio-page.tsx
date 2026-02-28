@@ -180,7 +180,7 @@ export function AudioPage({ userId }: AudioPageProps) {
         {notes.length} {notes.length === 1 ? 'nota' : 'notas'}
       </p>
 
-      <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+      <div className="notebook-scroll flex-1 min-h-0 overflow-y-auto pr-1">
         {loading ? (
           <p className="text-xs text-center pt-8" style={{ color: 'var(--nb-muted, #8B7355)', ...SERIF }}>Cargando...</p>
         ) : notes.length === 0 ? (

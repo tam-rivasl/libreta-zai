@@ -243,7 +243,7 @@ export function WritingPage({ userId }: WritingPageProps) {
         </p>
 
         {/* List — each row sits on 2 lines */}
-        <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+        <div className="notebook-scroll flex-1 min-h-0 overflow-y-auto pr-1">
           {loading ? (
             <div className="flex items-center justify-center h-full">
               <p className="text-xs" style={{ color: 'var(--nb-muted, #8B7355)', ...SERIF }}>Cargando...</p>
@@ -352,7 +352,7 @@ export function WritingPage({ userId }: WritingPageProps) {
         {/* Body text — fills remaining space, perfectly aligned */}
         <div className="flex-1 overflow-hidden">
           <div
-            className="h-full overflow-y-auto text-sm [&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5"
+            className="notebook-scroll h-full overflow-y-auto text-sm [&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5"
             style={{ color: 'var(--nb-ink, #3a2518)', ...SERIF, lineHeight: `${LINE_H}px` }}
             dangerouslySetInnerHTML={{ __html: sanitizeRichTextHtml(normalizeRichTextContent(current.content)) }}
           />

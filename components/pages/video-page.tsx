@@ -412,7 +412,7 @@ export function VideoPage({ userId }: VideoPageProps) {
         )}
       </div>
 
-      <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+      <div className="notebook-scroll flex-1 min-h-0 overflow-y-auto pr-1">
         {loading ? (
           <p className="text-xs text-center pt-8" style={{ color: 'var(--nb-muted, #8B7355)', ...SERIF }}>Cargando...</p>
         ) : videos.length === 0 ? (

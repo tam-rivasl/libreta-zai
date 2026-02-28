@@ -28,7 +28,6 @@ import {
   Undo2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import {
   hasMeaningfulRichText,
@@ -195,8 +194,8 @@ export function RichTextEditor({
   })
 
   const normalizedValue = useMemo(() => normalizeRichTextContent(value), [value])
-  const toolbarControlHeight = Math.max(24, lineHeight - 6)
-  const toolbarRowHeight = Math.max(28, lineHeight + 4)
+  const toolbarControlHeight = Math.max(28, lineHeight + 4)
+  const toolbarRowHeight = Math.max(38, lineHeight + 12)
 
   useEffect(() => {
     const editor = editorRef.current
@@ -495,7 +494,7 @@ export function RichTextEditor({
       style={{ borderColor: 'var(--nb-line, #d4c5a9)', background: 'rgba(245,236,216,0.22)' }}
     >
       <div
-        className="flex flex-col gap-1 px-2 py-1"
+        className="flex flex-col gap-1.5 px-2.5 py-1.5"
         style={{
           borderBottom: '1px solid var(--nb-line, #d4c5a9)',
           fontFamily: NOTEBOOK_FONT_FAMILY_CSS_VAR,
@@ -503,15 +502,17 @@ export function RichTextEditor({
       >
         <div
           className="w-full"
-          style={{ minHeight: `${lineHeight - 2}px` }}
+          style={{ minHeight: `${lineHeight}px` }}
         >
-          <ScrollArea
-            type="always"
-            className="w-full"
-            showVerticalScrollbar={false}
-            style={{ height: `${toolbarRowHeight}px` }}
+          <div
+            className="notebook-scroll w-full overflow-x-auto overflow-y-hidden pb-1"
+            style={{
+              height: `${toolbarRowHeight}px`,
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-x',
+            }}
           >
-            <div className="flex w-max items-center gap-1 pr-2">
+            <div className="flex w-max items-center gap-1.5 px-0.5 pr-3">
               <ToolbarButton icon={Undo2} onClick={() => runCommand('undo')} title="Deshacer" disabled={disabled} />
               <ToolbarButton icon={Redo2} onClick={() => runCommand('redo')} title="Rehacer" disabled={disabled} />
               <ToolbarSeparator />
@@ -532,12 +533,12 @@ export function RichTextEditor({
                 value={currentBlock}
                 onChange={(event) => applyBlock(event.target.value as BlockType)}
                 disabled={disabled}
-                className="rounded border bg-transparent px-1.5 text-[11px] outline-none"
+                className="rounded border bg-transparent px-2 text-[11px] outline-none"
                 style={{
                   height: `${toolbarControlHeight}px`,
                   borderColor: 'var(--nb-border, #c4a87a)',
                   color: 'var(--nb-ink, #3a2518)',
-                  minWidth: '88px',
+                  minWidth: '90px',
                 }}
               >
                 {blockOptions.map((option) => (
@@ -552,7 +553,7 @@ export function RichTextEditor({
                 value={selectedFont}
                 onChange={(event) => applyFontName(event.target.value)}
                 disabled={disabled}
-                className="rounded border bg-transparent px-1.5 text-[11px] outline-none"
+                className="rounded border bg-transparent px-2 text-[11px] outline-none"
                 style={{
                   height: `${toolbarControlHeight}px`,
                   borderColor: 'var(--nb-border, #c4a87a)',
@@ -572,12 +573,12 @@ export function RichTextEditor({
                 value={String(selectedSize)}
                 onChange={(event) => applyFontSize(Number(event.target.value))}
                 disabled={disabled}
-                className="rounded border bg-transparent px-1.5 text-[11px] outline-none"
+                className="rounded border bg-transparent px-2 text-[11px] outline-none"
                 style={{
                   height: `${toolbarControlHeight}px`,
                   borderColor: 'var(--nb-border, #c4a87a)',
                   color: 'var(--nb-ink, #3a2518)',
-                  minWidth: '54px',
+                  minWidth: '58px',
                 }}
               >
                 {fontSizeOptions.map((size) => (
@@ -590,20 +591,22 @@ export function RichTextEditor({
               <ToolbarTextButton label="A+" onClick={increaseFontSize} title="Aumentar tamaño" disabled={disabled} />
               <ToolbarTextButton label="A-" onClick={decreaseFontSize} title="Disminuir tamaño" disabled={disabled} />
             </div>
-          </ScrollArea>
+          </div>
         </div>
 
         <div
           className="w-full"
-          style={{ minHeight: `${lineHeight - 2}px` }}
+          style={{ minHeight: `${lineHeight}px` }}
         >
-          <ScrollArea
-            type="always"
-            className="w-full"
-            showVerticalScrollbar={false}
-            style={{ height: `${toolbarRowHeight}px` }}
+          <div
+            className="notebook-scroll w-full overflow-x-auto overflow-y-hidden pb-1"
+            style={{
+              height: `${toolbarRowHeight}px`,
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-x',
+            }}
           >
-            <div className="flex w-max items-center gap-1 pr-2">
+            <div className="flex w-max items-center gap-1.5 px-0.5 pr-3">
               <ToolbarButton
                 icon={Bold}
                 onClick={() => runCommand('bold')}
@@ -648,7 +651,7 @@ export function RichTextEditor({
               />
               <ToolbarButton icon={Eraser} onClick={() => runCommand('removeFormat')} title="Limpiar formato" disabled={disabled} />
 
-              <label className="ml-1 inline-flex items-center gap-1 text-[10px]" style={{ color: '#6b5744' }}>
+              <label className="ml-1.5 inline-flex items-center gap-1.5 text-[10px]" style={{ color: '#6b5744' }}>
                 <Palette size={11} />
                 <input
                   type="color"
@@ -661,7 +664,7 @@ export function RichTextEditor({
                 />
               </label>
 
-              <label className="inline-flex items-center gap-1 text-[10px]" style={{ color: '#6b5744' }}>
+              <label className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: '#6b5744' }}>
                 <Highlighter size={11} />
                 <input
                   type="color"
@@ -732,12 +735,12 @@ export function RichTextEditor({
                 value={lineSpacing}
                 onChange={(event) => applyLineSpacing(event.target.value as LineSpacingValue)}
                 disabled={disabled}
-                className="rounded border bg-transparent px-1.5 text-[11px] outline-none"
+                className="rounded border bg-transparent px-2 text-[11px] outline-none"
                 style={{
                   height: `${toolbarControlHeight}px`,
                   borderColor: 'var(--nb-border, #c4a87a)',
                   color: 'var(--nb-ink, #3a2518)',
-                  minWidth: '54px',
+                  minWidth: '62px',
                 }}
               >
                 {lineSpacingOptions.map((spacing) => (
@@ -747,7 +750,7 @@ export function RichTextEditor({
                 ))}
               </select>
             </div>
-          </ScrollArea>
+          </div>
         </div>
 
       </div>
@@ -831,16 +834,16 @@ function ToolbarButton({
       aria-pressed={active}
       title={title}
       disabled={disabled}
-      className="inline-flex items-center justify-center rounded border transition-colors hover:bg-amber-50 disabled:opacity-40"
+      className="inline-flex items-center justify-center rounded border shadow-[0_0_0_1px_rgba(139,69,19,0.05)] transition-colors hover:bg-amber-50 disabled:opacity-40"
       style={{
-        width: '22px',
-        height: '22px',
+        width: 'clamp(24px, 7.2vw, 30px)',
+        height: 'clamp(24px, 7.2vw, 30px)',
         color: active ? '#f5ecd8' : '#6b5744',
         background: active ? 'var(--nb-accent, #8B4513)' : 'transparent',
         borderColor: active ? 'var(--nb-accent, #8B4513)' : 'rgba(139,69,19,0.25)',
       }}
     >
-      <Icon size={13} />
+      <Icon size={14} />
     </button>
   )
 }
@@ -862,10 +865,11 @@ function ToolbarTextButton({
       onClick={onClick}
       title={title}
       disabled={disabled}
-      className="inline-flex items-center justify-center rounded px-1 text-[11px] transition-colors disabled:opacity-40"
+      className="inline-flex items-center justify-center rounded border px-1.5 text-[11px] transition-colors hover:bg-amber-50 disabled:opacity-40"
       style={{
-        height: '22px',
+        height: 'clamp(24px, 7.2vw, 30px)',
         color: '#6b5744',
+        borderColor: 'rgba(139,69,19,0.25)',
       }}
     >
       {label}
@@ -877,7 +881,7 @@ function ToolbarSeparator() {
   return (
     <Separator
       orientation="vertical"
-      className="mx-1 h-4 shrink-0"
+      className="mx-2 h-5 shrink-0"
       style={{ background: 'rgba(139,69,19,0.25)' }}
     />
   )

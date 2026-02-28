@@ -302,7 +302,7 @@ export function MusicPage({ userId }: MusicPageProps) {
       </div>
 
       {/* Playlist */}
-      <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+      <div className="notebook-scroll flex-1 min-h-0 overflow-y-auto pr-1">
         {loading ? (
           <p className="text-xs text-center pt-8" style={{ color: 'var(--nb-muted, #8B7355)', ...SERIF }}>Cargando...</p>
         ) : tracks.length === 0 ? (

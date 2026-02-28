@@ -30,7 +30,7 @@ export function NotebookPageWrapper({
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="notebook-scroll flex-1 overflow-y-auto">
         {children}
       </div>
     </div>

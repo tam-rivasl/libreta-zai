@@ -9,6 +9,7 @@ const OPEN_SCENE_MS = 1900
 const OPEN_PAGE_MS = 1900
 const OPEN_COVER_MS = 1900
 const HINGE_LEFT = "9.25%"
+const OPEN_CENTER_SHIFT = "clamp(30px, 8vw, 68px)"
 
 interface NotebookCoverProps {
   onOpen?: () => void
@@ -58,7 +59,7 @@ export function NotebookCover({
     ['--cover-book-w' as string]: bookW,
   } as CSSProperties
   const sceneTransform = isOpen
-    ? "translateX(-3.5%) rotateY(-11deg) rotateX(3deg) scale(1.01)"
+    ? `translateX(${OPEN_CENTER_SHIFT}) rotateY(-8deg) rotateX(2deg) scale(1.01)`
     : canHover && isHovered
       ? "rotateX(6deg) rotateY(-6deg) translateY(-6px)"
       : "none"
@@ -87,7 +88,7 @@ export function NotebookCover({
           bottom: "calc(50% - (var(--cover-book-w) * 0.68))",
           background: "rgba(0,0,0,0.5)",
           filter: "blur(24px)",
-          transform: isOpen ? "scaleX(2.35) translateX(88px)" : "scaleX(1)",
+          transform: isOpen ? "scaleX(2.2) translateX(72px)" : "scaleX(1)",
           opacity: isOpen ? 0.12 : 0.48,
           transition: `all ${OPEN_SCENE_MS}ms ${OPEN_EASE}`,
         }}

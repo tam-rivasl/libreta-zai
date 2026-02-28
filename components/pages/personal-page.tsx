@@ -246,7 +246,7 @@ export function PersonalPage({ userId }: PersonalPageProps) {
           </p>
           <div className="flex-1 overflow-hidden">
             <div
-              className="h-full overflow-y-auto text-sm [&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5"
+              className="notebook-scroll h-full overflow-y-auto text-sm [&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5"
               style={{ color: 'var(--nb-ink, #3a2518)', ...SERIF, lineHeight: `${LINE_H}px` }}
               dangerouslySetInnerHTML={{ __html: sanitizeRichTextHtml(normalizeRichTextContent(n.content)) }}
             />
@@ -306,7 +306,7 @@ export function PersonalPage({ userId }: PersonalPageProps) {
         {notes.length} {notes.length === 1 ? 'entrada privada' : 'entradas privadas'}
       </p>
 
-      <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+      <div className="notebook-scroll flex-1 min-h-0 overflow-y-auto pr-1">
         {loading ? (
           <p className="text-xs text-center pt-8" style={{ color: 'var(--nb-muted, #8B7355)', ...SERIF }}>Cargando...</p>
         ) : notes.length === 0 ? (
