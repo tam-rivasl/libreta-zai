@@ -4,10 +4,11 @@ import { useEffect, useState, type CSSProperties } from "react"
 
 const DEFAULT_COVER_SRC = "/images/notebook-cover.jpg"
 const OPEN_EASE = "cubic-bezier(0.18, 0.9, 0.2, 1)"
-const PAGE_FOLD_EASE = "cubic-bezier(0.26, 0.84, 0.2, 1)"
+const PAGE_FOLD_EASE = OPEN_EASE
 const OPEN_SCENE_MS = 1900
 const OPEN_PAGE_MS = 1900
 const OPEN_COVER_MS = 1900
+const HINGE_LEFT = "9.25%"
 
 interface NotebookCoverProps {
   onOpen?: () => void
@@ -57,7 +58,7 @@ export function NotebookCover({
     ['--cover-book-w' as string]: bookW,
   } as CSSProperties
   const sceneTransform = isOpen
-    ? "translateX(-9%) rotateY(-11deg) rotateX(3deg) scale(1.01)"
+    ? "translateX(-3.5%) rotateY(-11deg) rotateX(3deg) scale(1.01)"
     : canHover && isHovered
       ? "rotateX(6deg) rotateY(-6deg) translateY(-6px)"
       : "none"
@@ -65,11 +66,8 @@ export function NotebookCover({
     ? "translateX(0.8%) scaleX(0.995)"
     : "translateX(0%) scaleX(1)"
   const turningSheetTransform = isOpen
-    ? "rotateY(-176deg) translateZ(-1px)"
+    ? "rotateY(-174deg) translateZ(-1px)"
     : "rotateY(0deg) translateZ(-8px)"
-  const turningSheetFaceTransform = isOpen
-    ? "skewY(-0.55deg) scaleX(0.98) translateZ(0.6px)"
-    : "skewY(0deg) scaleX(1) translateZ(0.6px)"
 
   useEffect(() => {
     setCoverLoadFailed(false)
@@ -138,7 +136,7 @@ export function NotebookCover({
         <div
           className="absolute top-3 bottom-3"
           style={{
-            left: "9.25%",
+            left: HINGE_LEFT,
             right: "4px",
             background:
               "repeating-linear-gradient(to right, #e8dcc8, #f5ede0 3px, #e2d4bc 4px)",
@@ -159,14 +157,14 @@ export function NotebookCover({
         <div
           className="absolute top-3 bottom-3 z-[6] pointer-events-none"
           style={{
-            left: "9.25%",
+            left: HINGE_LEFT,
             right: "4px",
             transformOrigin: "left center",
             transformStyle: "preserve-3d",
             transform: turningSheetTransform,
             opacity: 1,
             overflow: "hidden",
-            transition: `transform ${OPEN_PAGE_MS}ms ${PAGE_FOLD_EASE} 95ms`,
+            transition: `transform ${OPEN_PAGE_MS}ms ${PAGE_FOLD_EASE} 60ms`,
             willChange: "transform",
           }}
         >
@@ -177,12 +175,11 @@ export function NotebookCover({
               backgroundColor: "var(--nb-paper, #f5ecd8)",
               backgroundImage: innerPaperStyle,
               transformOrigin: "left center",
-              transform: turningSheetFaceTransform,
-              transition: `transform ${OPEN_PAGE_MS}ms ${PAGE_FOLD_EASE} 95ms`,
+              transform: "translateZ(0.6px)",
               boxShadow: isOpen
                 ? "inset 20px 0 24px rgba(34,16,8,0.38), 8px 0 20px rgba(0,0,0,0.25)"
                 : "inset 0 0 0 rgba(0,0,0,0), 1px 0 8px rgba(0,0,0,0.1)",
-              backfaceVisibility: "hidden",
+              backfaceVisibility: "visible",
             }}
           />
 
@@ -195,21 +192,6 @@ export function NotebookCover({
                 "linear-gradient(to right, rgba(52,24,12,0.32), rgba(255,247,233,0.26), transparent)",
               opacity: isOpen ? 1 : 0.18,
               transition: `opacity ${OPEN_PAGE_MS}ms ${PAGE_FOLD_EASE} 90ms`,
-            }}
-          />
-
-          {/* Back face of the sheet (visible during the turn) */}
-          <div
-            className="absolute inset-0"
-            style={{
-              borderRadius: "0 4px 4px 0",
-              transform: "rotateY(180deg) translateZ(0.6px)",
-              transformOrigin: "left center",
-              backgroundColor: "var(--nb-paper, #f5ecd8)",
-              backgroundImage: innerPaperStyle,
-              filter: "none",
-              boxShadow: "inset -14px 0 18px rgba(28,12,5,0.3)",
-              backfaceVisibility: "hidden",
             }}
           />
         </div>
@@ -247,7 +229,7 @@ export function NotebookCover({
             borderRadius: "8px",
             clipPath: "inset(0 round 8px)",
             isolation: "isolate",
-            transformOrigin: "left center",
+            transformOrigin: `${HINGE_LEFT} center`,
             transformStyle: "preserve-3d",
             backfaceVisibility: "visible",
             transform: isOpen ? "rotateY(-174deg)" : "rotateY(0deg)",
